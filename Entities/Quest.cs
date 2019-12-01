@@ -12,5 +12,6 @@ namespace ChanceQuest.Entities
         public int HappyPlus { get; set; } // the int that adds happiness to according faction
         public int HappyMinus { get; set; } // the int that subtracts happiness from remaining factions
         public Faction FactionType { get; set; }
+        // erase later
     }
 }
