@@ -9,8 +9,31 @@ namespace ChanceQuest.Entities
     {
         public int Id { get; set; } // to differentiate quests
         public string Description { get; set; } // just text that describes what the quest entails
-        public int HappyPlus { get; set; } // the int that adds happiness to according faction
-        public int HappyMinus { get; set; } // the int that subtracts happiness from remaining factions
+        int _HappyPlus { get; set; } // the int that adds happiness to according faction
+        public int HappyPlus
+        {
+            get
+            {
+                return this.HappyPlus;
+            }
+            set
+            {
+                this._HappyPlus = 20;
+            }
+        }
+        int _HappyMinus { get; set; }// the int that subtracts happiness from remaining factions
+
+        public int HappyMinus
+        {
+            get
+            {
+                return this.HappyMinus;
+            }
+            set
+            {
+                this._HappyMinus = 5;
+            }
+        }
         public Faction FactionType { get; set; }
         // erase later
     }

@@ -9,7 +9,7 @@ namespace ChanceQuest.Models.Quest
     {
         public int Id { get; internal set; }
         public string Description { get; internal set; }
-        public int HappyPlus { get; internal set; }
+        public int HappyPlus { get; set; }
         public int HappyMinus { get; internal set; }
     }
 }
