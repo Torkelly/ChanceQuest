@@ -2,6 +2,6 @@
 {
     public class PeasantHappyPlus
     {
-        public int PeasantHappiness { get; set; }
+        public int PeasantHappiness { get; internal set; }
     }
 }
