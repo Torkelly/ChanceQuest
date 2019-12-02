@@ -1,5 +1,6 @@
 ﻿using ChanceQuest.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace ChanceQuest.Controllers
 {
+    [EnableCors("AllowAnyOrigin")]
+    [ValidateAntiForgeryToken]
     public class GameController : Controller
     {
         private readonly GameService _service;

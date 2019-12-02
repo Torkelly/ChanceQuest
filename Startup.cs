@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using ChanceQuest.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace ChanceQuest
 {
@@ -40,7 +41,16 @@ namespace ChanceQuest
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options => {
+                options.Filters.Add(
+                    new CorsAuthorizationFilterFactory("AllowAnyOrigin"));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            services.AddCors(options => {
+                options.AddPolicy("AllowAnyOrigin", policy =>
+                    policy.WithOrigins("http://chancequest.azurewebsites.net")
+                        .AllowAnyMethod());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
