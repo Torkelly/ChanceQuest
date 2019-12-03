@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace ChanceQuest.Models
 {
-{
     public class GameViewModel
     {
         public int Id { get; set; }
