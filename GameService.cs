@@ -44,8 +44,8 @@ namespace ChanceQuest
                     Id = q.Id,
                     Description = q.Description,
                     HappyPlus = q.HappyPlus,
-                    HappyMinus = q.HappyMinus
-                    //FactionType = q.FactionType
+                    HappyMinus = q.HappyMinus,
+                    FactionId = q.FactionId
                 })
                 .SingleOrDefault();
         }

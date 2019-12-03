@@ -11,5 +11,6 @@ namespace ChanceQuest.Models.Quest
         public string Description { get; internal set; }
         public int HappyPlus { get; set; }
         public int HappyMinus { get; internal set; }
+        public int FactionId { get; set; }
     }
 }
