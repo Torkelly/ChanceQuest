@@ -22,7 +22,7 @@ namespace ChanceQuest.Controllers
             _context = context;
         }
 
-        IEnumerable<QuestViewModel> Quests = new List<QuestViewModel>()
+        IEnumerable<QuestViewModel> Quests = new List<QuestViewModel>() // FactionId: 1 = Peasant, 2 = Noble, 3 = Royal
         {
             new QuestViewModel()
             {

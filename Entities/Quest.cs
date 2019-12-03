@@ -34,7 +34,6 @@ namespace ChanceQuest.Entities
                 this._HappyMinus = 5;
             }
         }
-        public Faction FactionType { get; set; }
-        // erase later
+        public int FactionId { get; set; } // 1 = Peasant, 2 = Noble, 3 = Royal
     }
 }

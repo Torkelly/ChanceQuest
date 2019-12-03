@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 using ChanceQuest.Entities;
@@ -14,7 +15,6 @@ namespace ChanceQuest.Data
         {
         }
         public DbSet<Player> Players { get; set; }
-        public DbSet<Faction> Factions { get; set; }
         public DbSet<Quest> Quests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
