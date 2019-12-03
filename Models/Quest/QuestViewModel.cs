@@ -12,5 +12,6 @@ namespace ChanceQuest.Models.Quest
         public int HappyPlus { get; set; }
         public int HappyMinus { get; internal set; }
         public int FactionId { get; set; }
+        public int FavorableStatId { get; internal set; }
     }
 }
