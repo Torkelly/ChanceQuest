@@ -132,6 +132,7 @@ namespace ChanceQuest.Controllers
 
         // GET: api/QuestsAPI
         [HttpGet]
+        [Produces("application/xml")]
         public IEnumerable<Quest> GetQuests()
         {
             return _context.Quests;
@@ -139,6 +140,7 @@ namespace ChanceQuest.Controllers
 
         // GET: api/QuestsAPI/5
         [HttpGet("{id}")]
+        [Produces("application/xml")]
         public async Task<IActionResult> GetQuest([FromRoute] int id)
         {
             if (!ModelState.IsValid)

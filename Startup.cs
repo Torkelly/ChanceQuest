@@ -44,7 +44,8 @@ namespace ChanceQuest
             services.AddMvc(options => {
                 options.Filters.Add(
                     new CorsAuthorizationFilterFactory("AllowAnyOrigin"));
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+              .AddXmlSerializerFormatters();
             
             services.AddCors(options => {
                 options.AddPolicy("AllowAnyOrigin", policy =>
