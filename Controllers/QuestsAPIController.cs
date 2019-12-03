@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ChanceQuest.Data;
 using ChanceQuest.Entities;
 using ChanceQuest.Models.Quest;
+using Microsoft.Extensions.Logging;
 
 namespace ChanceQuest.Controllers
 {
@@ -16,10 +17,11 @@ namespace ChanceQuest.Controllers
     public class QuestsAPIController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-
-        public QuestsAPIController(ApplicationDbContext context)
+        private readonly ILogger<QuestsAPIController> _log;
+        public QuestsAPIController(ApplicationDbContext context, ILogger<QuestsAPIController> log)
         {
             _context = context;
+            _log = log;
         }
 
         IEnumerable<QuestViewModel> Quests = new List<QuestViewModel>() // FactionId: 1 = Peasant, 2 = Noble, 3 = Royal
@@ -135,6 +137,7 @@ namespace ChanceQuest.Controllers
         [Produces("application/xml")]
         public IEnumerable<Quest> GetQuests()
         {
+            _log.LogInformation("No parameter GetQuests() Call Successful");
             return _context.Quests;
         }
 
@@ -145,6 +148,7 @@ namespace ChanceQuest.Controllers
         {
             if (!ModelState.IsValid)
             {
+                _log.LogError("Bad Request for id:{id}");
                 return BadRequest(ModelState);
             }
 
@@ -152,6 +156,7 @@ namespace ChanceQuest.Controllers
 
             if (quest == null)
             {
+                _log.LogError("id:{id} not found.");
                 return NotFound();
             }
 
