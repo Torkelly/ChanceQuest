@@ -5,6 +5,7 @@ using ChanceQuest.Models.Quest;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,8 +45,8 @@ namespace ChanceQuest
                     Id = q.Id,
                     Description = q.Description,
                     HappyPlus = q.HappyPlus,
-                    HappyMinus = q.HappyMinus
-                    //FactionType = q.FactionType
+                    HappyMinus = q.HappyMinus,
+                    FactionId = q.FactionId
                 })
                 .SingleOrDefault();
         }
@@ -72,7 +73,18 @@ namespace ChanceQuest
                 .SingleOrDefault();
         }
 
-        public DeclineQuest Decline(int id)
+        public bool DoesQuestExist(int id)
+        {
+            var quest = _context.Quests.Find(id);
+
+            if (quest == null)
+            {
+                return false;
+            }
+            return !quest.IsDeleted;
+        }
+
+        /*public DeclineQuest Decline(int id)
         {
             return _context.Quests
                .Where(q => q.Id == id)
@@ -81,7 +93,7 @@ namespace ChanceQuest
                     // code here
                })
                .SingleOrDefault();
-        }
+        }    */
 
         //plus
 

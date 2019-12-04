@@ -5,8 +5,20 @@ using System.Threading.Tasks;
 
 namespace ChanceQuest.Models
 {
+{
     public class GameViewModel
     {
-        //player & quests view model for the html files
+        public int Id { get; set; }
+        public int PeasantHappiness { get; set; }
+        public int NobleHappiness { get; set; }
+        public int RoyalHappiness { get; set; }
+
+        public IEnumerable<QuestViewModel> Quests { get; set; }
+        public class QuestViewModel
+        {
+            public int Id { get; set; }
+            public int FavorableStat { get; set; }
+            public string Description { get; set; }
+        }
     }
 }

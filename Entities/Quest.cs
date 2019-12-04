@@ -34,7 +34,8 @@ namespace ChanceQuest.Entities
                 this._HappyMinus = 5;
             }
         }
-        public Faction FactionType { get; set; }
-        // erase later
+        public int FactionId { get; set; } // 1 = Peasant, 2 = Noble, 3 = Royal
+        public int FavorableStatId { get; set; } //1 = strengh, 2 = intelligence, 3 = dexterity
+        public bool IsDeleted { get; set; } // Check whether a Quest has been deleted
     }
 }
