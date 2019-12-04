@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChanceQuest.Entities
+namespace ChanceQuest.Models.Player
 {
-    public class Player
+    public class EditPlayer
     {
         public int Id { get; set; }
         public string CharacterName { get; set; }
@@ -13,7 +13,5 @@ namespace ChanceQuest.Entities
         public int NobleHappiness { get; set; }
         public int RoyalHappiness { get; set; }
         public int FavorableStatId { get; set; } //1 = str, 2 = int, 3 = dex
-
-        public bool IsDeleted { get; set; } // Check whether a player has been deleted
     }
 }

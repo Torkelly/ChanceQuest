@@ -1,4 +1,5 @@
 ﻿using ChanceQuest.Data;
+using ChanceQuest.Entities;
 using ChanceQuest.Models;
 using ChanceQuest.Models.Player;
 using ChanceQuest.Models.Quest;
@@ -24,7 +25,7 @@ namespace ChanceQuest
 
         public PlayerStateViewModel GetHappiness(int id)
         {
-            return _context.Players
+            return _context.Player
                 .Where(p => p.Id == id)
                 .Select(p => new PlayerStateViewModel
                 {
@@ -99,7 +100,7 @@ namespace ChanceQuest
 
         public PeasantHappyPlus PPlus(int id, int plus)
         {
-            return _context.Players
+            return _context.Player
                 .Where(p => p.Id == id)
                 .Select(p => new PeasantHappyPlus
                 {
@@ -110,7 +111,7 @@ namespace ChanceQuest
 
         public NobleHappyPlus NPlus(int id, int plus)
         {
-             return _context.Players
+             return _context.Player
                 .Where(n => n.Id == id)
                 .Select(n => new NobleHappyPlus
                 {
@@ -121,7 +122,7 @@ namespace ChanceQuest
 
         public RoyalHappyPlus RPlus(int id, int plus)
         {
-              return _context.Players
+              return _context.Player
                 .Where(r => r.Id == id)
                 .Select(r => new RoyalHappyPlus
                 {
@@ -134,7 +135,7 @@ namespace ChanceQuest
 
         public PeasantHappyMinus PMinus(int id, int minus)
         {
-             return _context.Players
+             return _context.Player
                 .Where(p => p.Id == id)
                 .Select(p => new PeasantHappyMinus
                 {
@@ -145,7 +146,7 @@ namespace ChanceQuest
 
         public NobleHappyMinus NMinus(int id, int minus)
         {
-             return _context.Players
+             return _context.Player
                 .Where(p => p.Id == id)
                 .Select(p => new NobleHappyMinus
                 {
@@ -156,13 +157,53 @@ namespace ChanceQuest
 
         public RoyalHappyMinus RMinus(int id, int minus)
         {
-             return _context.Players
+             return _context.Player
                 .Where(r => r.Id == id)
                 .Select(r => new RoyalHappyMinus
                 {
                     RoyalHappiness = (r.RoyalHappiness - minus)
                 })
                 .SingleOrDefault();
+        }
+        public int CreatePlayer(CreatePlayerCommand cmd)
+        {
+            var player = cmd.ToPlayer();
+            _context.Add(player);
+            _context.SaveChanges();
+            return player.Id;
+        }
+
+
+        public void UpdatePlayer(UpdatePlayerCommand cmd)
+        {
+            var player = _context.Player.Find(cmd.Id);
+            if (player == null) { throw new Exception("Unable to find the player"); }
+            if (player.IsDeleted) { throw new Exception("Unable to update a deleted player"); }
+
+            cmd.UpdatePlayer(player);
+            _context.SaveChanges();
+        }
+        public UpdatePlayerCommand GetPlayerForUpdate(int Id)
+        {
+            return _context.Player
+                .Where(x => x.Id == Id)
+                .Where(x => !x.IsDeleted)
+                .Select(x => new UpdatePlayerCommand
+                {
+                    CharacterName = x.CharacterName,
+                    PeasantHappiness = x.PeasantHappiness,
+                    RoyalHappiness = x.RoyalHappiness,
+                    FavorableStatId = x.FavorableStatId,
+                })
+                .SingleOrDefault();
+        }
+        public void DeletePlayer(int id)
+        {
+            var player = _context.Player.Find(id);
+            if (player.IsDeleted) { throw new Exception("Unable to delete a deleted player"); }
+
+            player.IsDeleted = true;
+            _context.SaveChanges();
         }
     }
 }

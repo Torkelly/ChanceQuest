@@ -14,7 +14,7 @@ namespace ChanceQuest.Data
             : base(options)
         {
         }
-        public DbSet<Player> Players { get; set; }
+        public DbSet<Player> Player { get; set; }
         public DbSet<Quest> Quests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
