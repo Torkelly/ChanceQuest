@@ -72,7 +72,7 @@ namespace ChanceQuest
                 .SingleOrDefault();
         }
 
-        /*public DeclineQuest Decline(int id)
+        public DeclineQuest Decline(int id)
         {
             return _context.Quests
                .Where(q => q.Id == id)
@@ -81,7 +81,7 @@ namespace ChanceQuest
                     // code here
                })
                .SingleOrDefault();
-        }    */
+        }
 
         //plus
 
