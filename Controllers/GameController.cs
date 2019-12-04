@@ -17,13 +17,13 @@ namespace ChanceQuest.Controllers
     public class GameController : Controller
     {
         private readonly GameService _service;
-        private readonly UserManager<Player> _playerService;
+        private readonly UserManager<IdentityUser> _playerService;
         private readonly IAuthorizationService _authService;
         private readonly ILogger<GameController> _logger;
 
         public GameController(
             GameService service,
-            UserManager<Player> playerService,
+            UserManager<IdentityUser> playerService,
             IAuthorizationService authService, ILogger<GameController> logger)
         {
             _service = service;
@@ -35,6 +35,13 @@ namespace ChanceQuest.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+
+        public IActionResult Play()
+        {
+            ViewData["Message"] = "Chance Quest";
             var models = _service.GetPlayer();
 
             if (models == null)
@@ -43,13 +50,6 @@ namespace ChanceQuest.Controllers
             }
 
             return View(models);
-        }
-
-
-        public IActionResult Play()
-        {
-            ViewData["Message"] = "Chance Quest";
-            return View();
         }
 
         public IActionResult Update()

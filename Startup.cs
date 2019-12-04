@@ -52,6 +52,8 @@ namespace ChanceQuest
                     policy.WithOrigins("http://chancequest.azurewebsites.net")
                         .AllowAnyMethod());
             });
+
+            services.AddScoped<GameService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
