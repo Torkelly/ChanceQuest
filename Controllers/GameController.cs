@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace ChanceQuest.Controllers
 {
     [EnableCors("AllowAnyOrigin")]
-    [ValidateAntiForgeryToken]
+    //[ValidateAntiForgeryToken]
     public class GameController : Controller
     {
         private readonly GameService _service;
