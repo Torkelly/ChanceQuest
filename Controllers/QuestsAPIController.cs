@@ -42,7 +42,7 @@ namespace ChanceQuest.Controllers
             },
             new QuestViewModel()
             {
-                Id = 3, FavorableStatId = 2, 
+                Id = 3, FavorableStatId = 2,  FactionId = 3,
                 Description = "Your royal highness summons you. 'The neighboring kingdom is occupying a town near our borders and the citizens are too welcoming! I need you to spread some... 'news' around town about the neighboring kingdom.'"
             },
 
@@ -60,7 +60,7 @@ namespace ChanceQuest.Controllers
 
             new QuestViewModel()
             {
-                Id = 6, FavorableStatId = 1,
+                Id = 6, FavorableStatId = 1, FactionId = 3,
                 Description = "You are summoned by a princess. She asks of you 'I hear tales of a boar terrorizing the poor people of a nearby village and father does nothing! Please help the village in my name.'"
             },
 
@@ -76,7 +76,7 @@ namespace ChanceQuest.Controllers
             },
             new QuestViewModel()
             {
-                Id = 9, FavorableStatId = 1,
+                Id = 9, FavorableStatId = 1, FactionId = 3,
                 Description = "A royal prince summons you. 'Far too long has the noble girl of the Broyle estate ignored me. Would you let me win in a fight with you so I might draw her attention?'"
             },
             new QuestViewModel()
@@ -91,7 +91,7 @@ namespace ChanceQuest.Controllers
             },
             new QuestViewModel()
             {
-                Id = 12, FavorableStatId = 2,
+                Id = 12, FavorableStatId = 2, FactionId = 3,
                 Description = "A polished boy who claims to be the youngest prince has taken a liking to you. The only problem is: he is an illegitimate child... you are asked to convince him to refrain from assuming the role of 'prince'"
             },
             new QuestViewModel()
@@ -106,7 +106,7 @@ namespace ChanceQuest.Controllers
             },
             new QuestViewModel()
             {
-                Id = 15, FavorableStatId = 1,
+                Id = 15, FavorableStatId = 1, FactionId = 3,
                 Description = "The royal pooch is an embarrassment. You are asked to find a dog that looks exactly like him - but whose attitude matches his royal highness's."
             },
             new QuestViewModel()
@@ -121,7 +121,7 @@ namespace ChanceQuest.Controllers
             },
             new QuestViewModel()
             {
-                Id = 18, FavorableStatId = 3,
+                Id = 18, FavorableStatId = 3, FactionId = 3,
                 Description = ""
             },
             new QuestViewModel()
