@@ -197,6 +197,22 @@ namespace ChanceQuest
                 })
                 .SingleOrDefault();
         }
+        public PlayerDetails GetPlayerDetails(int id)
+        {
+            return _context.Player
+                .Where(x => x.Id == id)
+                .Where(x => !x.IsDeleted)
+                .Select(x => new PlayerDetails
+                {
+                    Id = x.Id,
+                    CharacterName = x.CharacterName,
+                    PeasantHappiness = x.PeasantHappiness,
+                    NobleHappiness = x.NobleHappiness,
+                    RoyalHappiness = x.RoyalHappiness,
+                    FavorableStatId = x.FavorableStatId,
+                })
+                .SingleOrDefault();
+        }
         public void DeletePlayer(int id)
         {
             var player = _context.Player.Find(id);

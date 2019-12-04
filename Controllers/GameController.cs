@@ -66,6 +66,17 @@ namespace ChanceQuest.Controllers
         {
             return View();
         }
+        public IActionResult View(int id)
+        {
+            var model = _service.GetPlayerDetails(id);
+
+            if (model == null)
+            {
+                _logger.LogError("{Id} not found.", id);
+            }
+
+            return View(model);
+        }
         [Authorize]
         public IActionResult Create()
         {
