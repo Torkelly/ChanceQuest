@@ -1,6 +1,6 @@
 ﻿namespace ChanceQuest
 {
-    public class PeasantHappyPlus
+    internal class PeasantHappinessUpdateCommand
     {
         public int PeasantHappiness { get; internal set; }
     }

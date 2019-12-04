@@ -12,7 +12,7 @@ namespace ChanceQuest.Models.Player
         public int PeasantHappiness { get; set; }
         public int NobleHappiness { get; set; }
         public int RoyalHappiness { get; set; }
-        public int FavoriteStatId { get; set; }
+        public int FavorableStatId { get; set; }
 
         public static PlayerSummary FromPlayer(PlayerSummary ps)
         {
@@ -23,7 +23,6 @@ namespace ChanceQuest.Models.Player
                 PeasantHappiness = ps.PeasantHappiness,
                 NobleHappiness = ps.NobleHappiness,
                 RoyalHappiness = ps.RoyalHappiness,
-
             };
         }
     }

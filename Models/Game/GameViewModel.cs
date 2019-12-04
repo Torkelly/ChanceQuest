@@ -12,11 +12,11 @@ namespace ChanceQuest.Models
         public int NobleHappiness { get; set; }
         public int RoyalHappiness { get; set; }
 
-        public IEnumerable<QuestViewModel> Quests { get; set; }
-        public class QuestViewModel
+        public IEnumerable<Item> Quests { get; set; }
+        public class Item
         {
             public int Id { get; set; }
-            public int FavorableStat { get; set; }
+            public int FavorableStatId { get; set; }
             public string Description { get; set; }
         }
     }

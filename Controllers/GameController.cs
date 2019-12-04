@@ -1,4 +1,6 @@
-﻿using ChanceQuest.Entities;
+﻿using ChanceQuest.Data;
+using ChanceQuest.Entities;
+using ChanceQuest.Models.Game;
 using ChanceQuest.Models.Player;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -17,6 +19,7 @@ namespace ChanceQuest.Controllers
     public class GameController : Controller
     {
         private readonly GameService _service;
+        private readonly ApplicationDbContext context;
         private readonly UserManager<IdentityUser> _playerService;
         private readonly IAuthorizationService _authService;
         private readonly ILogger<GameController> _logger;
@@ -57,14 +60,75 @@ namespace ChanceQuest.Controllers
             return View();
         }
 
+        public void UpdatePlayer(int id)
+        {
+            var player = context.Player.Find(id);
+
+            if (player == null)
+            {
+                _logger.LogWarning("Error");
+                throw new Exception("Unable to find player");
+            }
+
+            Random rand = new Random();
+            int result = rand.Next(1, 100);
+            int faction = rand.Next(1, 3);
+            int pos, neg;
+            bool success;
+
+            if (result < 50)
+            {
+                pos = 0; //when player loses a quest - 50/50 chance
+                neg = -5;
+                success = false;
+            } 
+            else //if result is 50+
+            {
+                pos = 20; //faction gets +20 happiness when quest succeeds
+                neg = -5;
+                success = true;
+            }
+
+            if(success == true)
+            {
+                if (faction == 1)
+                {
+                    _service.PeasantHappinessUpdate(id, pos);
+                    _service.NobleHappinessUpdate(id, neg);
+                    _service.RoyalHappinessUpdate(id, neg);
+                    
+                }
+                else if (faction == 2)
+                {
+                    _service.PeasantHappinessUpdate(id, neg);
+                    _service.NobleHappinessUpdate(id, pos);
+                    _service.RoyalHappinessUpdate(id, neg);
+                }
+                else if (faction == 3)
+                {
+                    _service.PeasantHappinessUpdate(id, neg);
+                    _service.NobleHappinessUpdate(id, neg);
+                    _service.RoyalHappinessUpdate(id, pos);
+                }
+            } 
+            else
+            {
+                _service.PeasantHappinessUpdate(id, neg);
+                _service.NobleHappinessUpdate(id, neg);
+                _service.RoyalHappinessUpdate(id, neg);
+            }
+
+            context.SaveChanges();
+        }
+
         public IActionResult Win()
         {
-            return View();
+            return View(new WinGameViewModel());
         }
 
         public IActionResult Lose()
         {
-            return View();
+            return View(new LoseGameViewModel());
         }
         public IActionResult View(int id)
         {

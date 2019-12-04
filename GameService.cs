@@ -33,7 +33,7 @@ namespace ChanceQuest
                     PeasantHappiness = p.PeasantHappiness,
                     NobleHappiness = p.NobleHappiness,
                     RoyalHappiness = p.RoyalHappiness,
-                    FavoriteStatId = p.FavorableStatId
+                    FavorableStatId = p.FavorableStatId
                 })
                 .ToList();
         }
@@ -43,7 +43,6 @@ namespace ChanceQuest
                 .Where(p => p.Id == id)
                 .Select(p => new PlayerStateViewModel
                 {
-                    Id = p.Id,
                     PeasantHappiness = p.PeasantHappiness,
                     NobleHappiness = p.NobleHappiness,
                     RoyalHappiness = p.RoyalHappiness
@@ -66,28 +65,6 @@ namespace ChanceQuest
                 .SingleOrDefault();
         }
 
-        public WinQuest Win(int id)
-        {
-            return _context.Quests
-                .Where(q => q.Id == id)
-                .Select(q => new WinQuest
-                {
-                    //code here
-                })
-                .SingleOrDefault();
-        }
-
-        public LoseQuest Lose(int id)
-        {
-             return _context.Quests
-                .Where(q => q.Id == id)
-                .Select(q => new LoseQuest
-                {
-                    // code here
-                })
-                .SingleOrDefault();
-        }
-
         public bool DoesQuestExist(int id)
         {
             var quest = _context.Quests.Find(id);
@@ -99,86 +76,38 @@ namespace ChanceQuest
             return !quest.IsDeleted;
         }
 
-        /*public DeclineQuest Decline(int id)
-        {
-            return _context.Quests
-               .Where(q => q.Id == id)
-               .Select(q => new DeclineQuest
-               {
-                    // code here
-               })
-               .SingleOrDefault();
-        }    */
+        //All add the int val, if you need to subtract happiness, use a negative int
 
-        //plus
-
-        public PeasantHappyPlus PPlus(int id, int plus)
+        public void PeasantHappinessUpdate(int id, int val)
         {
-            return _context.Player
+            var player = _context.Player
                 .Where(p => p.Id == id)
-                .Select(p => new PeasantHappyPlus
+                .Select(p => new PeasantHappinessUpdateCommand
                 {
-                    PeasantHappiness = (p.PeasantHappiness + plus)
-                })
-                .SingleOrDefault();
+                    PeasantHappiness = (p.PeasantHappiness + val)
+                });
         }
 
-        public NobleHappyPlus NPlus(int id, int plus)
+        public void NobleHappinessUpdate(int id, int val)
         {
-             return _context.Player
+            var player = _context.Player
                 .Where(n => n.Id == id)
-                .Select(n => new NobleHappyPlus
+                .Select(n => new NobleHappinessUpdateCommand
                 {
-                    NobleHappiness = (n.NobleHappiness + plus)
-                })
-                .SingleOrDefault();
+                    NobleHappiness = (n.NobleHappiness + val)
+                });
         }
 
-        public RoyalHappyPlus RPlus(int id, int plus)
+        public void RoyalHappinessUpdate(int id, int value)
         {
-              return _context.Player
-                .Where(r => r.Id == id)
-                .Select(r => new RoyalHappyPlus
-                {
-                    RoyalHappiness = (r.RoyalHappiness + plus)
-                })
-                .SingleOrDefault();
+            var player = _context.Player
+              .Where(r => r.Id == id)
+              .Select(r => new RoyalHappinessUpdateCommand
+              {
+                  RoyalHappiness = (r.RoyalHappiness + value)
+              });
         }
 
-        //minus
-
-        public PeasantHappyMinus PMinus(int id, int minus)
-        {
-             return _context.Player
-                .Where(p => p.Id == id)
-                .Select(p => new PeasantHappyMinus
-                {
-                    PeasantHappiness = (p.PeasantHappiness - minus)
-                })
-                .SingleOrDefault();
-        }
-
-        public NobleHappyMinus NMinus(int id, int minus)
-        {
-             return _context.Player
-                .Where(p => p.Id == id)
-                .Select(p => new NobleHappyMinus
-                {
-                    NobleHappiness = (p.NobleHappiness - minus)
-                })
-                .SingleOrDefault();
-        }
-
-        public RoyalHappyMinus RMinus(int id, int minus)
-        {
-             return _context.Player
-                .Where(r => r.Id == id)
-                .Select(r => new RoyalHappyMinus
-                {
-                    RoyalHappiness = (r.RoyalHappiness - minus)
-                })
-                .SingleOrDefault();
-        }
         public int CreatePlayer(CreatePlayerCommand cmd)
         {
             var player = cmd.ToPlayer();
@@ -186,7 +115,6 @@ namespace ChanceQuest
             _context.SaveChanges();
             return player.Id;
         }
-
 
         public void UpdatePlayer(UpdatePlayerCommand cmd)
         {
@@ -197,6 +125,7 @@ namespace ChanceQuest
             cmd.UpdatePlayer(player);
             _context.SaveChanges();
         }
+
         public UpdatePlayerCommand GetPlayerForUpdate(int Id)
         {
             return _context.Player
@@ -211,6 +140,7 @@ namespace ChanceQuest
                 })
                 .SingleOrDefault();
         }
+
         public PlayerDetails GetPlayerDetails(int id)
         {
             return _context.Player
@@ -224,10 +154,10 @@ namespace ChanceQuest
                     NobleHappiness = x.NobleHappiness,
                     RoyalHappiness = x.RoyalHappiness,
                     FavorableStatId = x.FavorableStatId,
- 
                 })
                 .SingleOrDefault();
         }
+
         public void DeletePlayer(int id)
         {
             var player = _context.Player.Find(id);
