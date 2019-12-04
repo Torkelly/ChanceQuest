@@ -51,10 +51,10 @@ namespace ChanceQuest
                 .SingleOrDefault();
         }
 
-        public GameViewModel GetGameView()
+       /* public GameViewModel GetGameView()
         {
             return _context
-        }
+        } */
 
         public QuestViewModel GetNewQuest(int id)
         {

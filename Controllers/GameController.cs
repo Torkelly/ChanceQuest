@@ -3,7 +3,6 @@ using ChanceQuest.Entities;
 using ChanceQuest.Models;
 using ChanceQuest.Models.Game;
 using ChanceQuest.Models.Player;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
@@ -61,7 +60,7 @@ namespace ChanceQuest.Controllers
         // use on a button
         public IActionResult AttemptQuest(GameViewModel model) 
         {
-            int id = int.Parse(User.Identity.GetUserId());
+            int id = model.Id;
             UpdatePlayer(id); // gets the user id and calls update method
 
             Random rand = new Random(); //gets 3 ints between 1 - 15 to choose quest Id
