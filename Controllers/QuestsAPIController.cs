@@ -9,10 +9,14 @@ using ChanceQuest.Data;
 using ChanceQuest.Entities;
 using ChanceQuest.Models.Quest;
 using Microsoft.Extensions.Logging;
+using ChanceQuest.Filters;
 
 namespace ChanceQuest.Controllers
 {
     [Route("api/[controller]")]
+    [FeatureEnabled(IsEnabled = true)]
+    [ValidateModel] 
+    [EnsureQuestExists]
     [ApiController]
     public class QuestsAPIController : ControllerBase
     {
@@ -146,19 +150,8 @@ namespace ChanceQuest.Controllers
         [Produces("application/xml")]
         public async Task<IActionResult> GetQuest([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                _log.LogError("Bad Request for id:{id}");
-                return BadRequest(ModelState);
-            }
 
             var quest = await _context.Quests.FindAsync(id);
-
-            if (quest == null)
-            {
-                _log.LogError("id:{id} not found.");
-                return NotFound();
-            }
 
             return Ok(quest);
         }
@@ -166,11 +159,7 @@ namespace ChanceQuest.Controllers
         // PUT: api/QuestsAPI/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuest([FromRoute] int id, [FromBody] Quest quest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        { 
 
             if (id != quest.Id)
             {
@@ -202,11 +191,6 @@ namespace ChanceQuest.Controllers
         [HttpPost]
         public async Task<IActionResult> PostQuest([FromBody] Quest quest)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _context.Quests.Add(quest);
             await _context.SaveChangesAsync();
 
@@ -217,17 +201,7 @@ namespace ChanceQuest.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuest([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var quest = await _context.Quests.FindAsync(id);
-            if (quest == null)
-            {
-                return NotFound();
-            }
-
             _context.Quests.Remove(quest);
             await _context.SaveChangesAsync();
 

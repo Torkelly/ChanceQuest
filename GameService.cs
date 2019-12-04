@@ -5,6 +5,7 @@ using ChanceQuest.Models.Quest;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -70,6 +71,17 @@ namespace ChanceQuest
                     // code here
                 })
                 .SingleOrDefault();
+        }
+
+        public bool DoesQuestExist(int id)
+        {
+            var quest = _context.Quests.Find(id);
+
+            if (quest == null)
+            {
+                return false;
+            }
+            return !quest.IsDeleted;
         }
 
         /*public DeclineQuest Decline(int id)
