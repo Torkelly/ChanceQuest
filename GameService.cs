@@ -22,7 +22,21 @@ namespace ChanceQuest
             _context = context;
             _logger = factory.CreateLogger<GameService>();
         }
-
+        public ICollection<PlayerSummary> GetPlayer()
+        {
+            return _context.Player
+                .Where(p => !p.IsDeleted)
+                .Select(p => new PlayerSummary
+                {
+                    Id = p.Id,
+                    CharacterName = p.CharacterName,
+                    PeasantHappiness = p.PeasantHappiness,
+                    NobleHappiness = p.NobleHappiness,
+                    RoyalHappiness = p.RoyalHappiness,
+                    FavoriteStatId = p.FavorableStatId
+                })
+                .ToList();
+        }
         public PlayerStateViewModel GetHappiness(int id)
         {
             return _context.Player
@@ -210,6 +224,7 @@ namespace ChanceQuest
                     NobleHappiness = x.NobleHappiness,
                     RoyalHappiness = x.RoyalHappiness,
                     FavorableStatId = x.FavorableStatId,
+ 
                 })
                 .SingleOrDefault();
         }

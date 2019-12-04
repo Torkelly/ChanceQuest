@@ -35,7 +35,7 @@ namespace ChanceQuest.Controllers
 
         public IActionResult Index()
         {
-            var models = _service.GetHappiness(1);
+            var models = _service.GetPlayer();
 
             if (models == null)
             {
