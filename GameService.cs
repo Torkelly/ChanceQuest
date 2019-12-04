@@ -37,7 +37,8 @@ namespace ChanceQuest
                 })
                 .ToList();
         }
-        public PlayerStateViewModel GetHappiness(int id)
+
+        public PlayerStateViewModel GetPlayerState(int id)
         {
             return _context.Player
                 .Where(p => p.Id == id)
@@ -48,6 +49,11 @@ namespace ChanceQuest
                     RoyalHappiness = p.RoyalHappiness
                 })
                 .SingleOrDefault();
+        }
+
+        public GameViewModel GetGameView()
+        {
+            return _context
         }
 
         public QuestViewModel GetNewQuest(int id)
@@ -98,13 +104,13 @@ namespace ChanceQuest
                 });
         }
 
-        public void RoyalHappinessUpdate(int id, int value)
+        public void RoyalHappinessUpdate(int id, int val)
         {
             var player = _context.Player
               .Where(r => r.Id == id)
               .Select(r => new RoyalHappinessUpdateCommand
               {
-                  RoyalHappiness = (r.RoyalHappiness + value)
+                  RoyalHappiness = (r.RoyalHappiness + val)
               });
         }
 

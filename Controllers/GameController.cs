@@ -1,7 +1,9 @@
 ﻿using ChanceQuest.Data;
 using ChanceQuest.Entities;
+using ChanceQuest.Models;
 using ChanceQuest.Models.Game;
 using ChanceQuest.Models.Player;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +26,7 @@ namespace ChanceQuest.Controllers
         private readonly IAuthorizationService _authService;
         private readonly ILogger<GameController> _logger;
 
+
         public GameController(
             GameService service,
             UserManager<IdentityUser> playerService,
@@ -41,7 +44,6 @@ namespace ChanceQuest.Controllers
             return View();
         }
 
-
         public IActionResult Play()
         {
             ViewData["Message"] = "Chance Quest";
@@ -55,9 +57,23 @@ namespace ChanceQuest.Controllers
             return View(models);
         }
 
-        public IActionResult Update()
+        // essentially the "play" action. 
+        // use on a button
+        public IActionResult AttemptQuest(GameViewModel model) 
         {
-            return View();
+            int id = int.Parse(User.Identity.GetUserId());
+            UpdatePlayer(id); // gets the user id and calls update method
+
+            Random rand = new Random(); //gets 3 ints between 1 - 15 to choose quest Id
+            int result1 = rand.Next(1, 15);
+            int result2 = rand.Next(1, 15);
+            int result3 = rand.Next(1, 15);
+
+            var quest1 = _service.GetNewQuest(result1); //gets new quests
+            var quest2 = _service.GetNewQuest(result2);
+            var quest3 = _service.GetNewQuest(result3);
+
+            return View(model);
         }
 
         public void UpdatePlayer(int id)
@@ -73,14 +89,12 @@ namespace ChanceQuest.Controllers
             Random rand = new Random();
             int result = rand.Next(1, 100);
             int faction = rand.Next(1, 3);
-            int pos, neg;
-            bool success;
+            int pos, neg; bool success = false;
 
             if (result < 50)
             {
                 pos = 0; //when player loses a quest - 50/50 chance
                 neg = -5;
-                success = false;
             } 
             else //if result is 50+
             {
@@ -130,7 +144,8 @@ namespace ChanceQuest.Controllers
         {
             return View(new LoseGameViewModel());
         }
-        public IActionResult View(int id)
+
+        public IActionResult ViewPlayer(int id)
         {
             var model = _service.GetPlayerDetails(id);
 
