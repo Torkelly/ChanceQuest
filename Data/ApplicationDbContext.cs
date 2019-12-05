@@ -5,6 +5,7 @@ using System.Text;
 using ChanceQuest.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ChanceQuest.Models.Player;
 
 namespace ChanceQuest.Data
 {
@@ -19,5 +20,9 @@ namespace ChanceQuest.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlServer(@"Server=tcp:chance-quest-server.database.windows.net,1433;Initial Catalog=ChanceQuestDB;Persist Security Info=False;User ID=CQAdmin;Password=Quest1234!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+        public DbSet<ChanceQuest.Entities.CreatePlayerCommand> CreatePlayerCommand { get; set; }
+
+        public DbSet<ChanceQuest.Models.Player.PlayerSummary> PlayerSummary { get; set; }
     }
 }
