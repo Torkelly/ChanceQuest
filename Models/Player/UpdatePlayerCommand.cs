@@ -1,10 +1,12 @@
 ﻿using ChanceQuest.Data;
-using ChanceQuest.Models.Player;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-namespace ChanceQuest.Models.Player
+using ChanceQuest.Entities;
+using ChanceQuest.Models.Player;
+
+namespace ChanceQuest.Models
 {
     public class UpdatePlayerCommand : EditPlayer
     {
