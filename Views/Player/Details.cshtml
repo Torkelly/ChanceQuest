@@ -1,0 +1,55 @@
+﻿@model ChanceQuest.Entities.Player
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Player</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacterName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CharacterName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PeasantHappiness)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PeasantHappiness)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NobleHappiness)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NobleHappiness)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RoyalHappiness)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RoyalHappiness)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FavorableStatId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FavorableStatId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Play">Play Game</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

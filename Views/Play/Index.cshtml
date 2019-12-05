@@ -1,0 +1,14 @@
+﻿@using ChanceQuest.Models.Player
+@model GameViewModel
+<h2>Quest</h2>
+<hr />
+<form asp-controller="Play" asp-action="Index" method="post" class="form-horizontal">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="CharacterName" class="col-md-2 control-label"></label>
+        <div class="col-md-4">
+            <textarea asp-for="CharacterName" class="form-control" />
+            <span asp-validation-for="CharacterName" class="text-danger"></span>
+        </div>
+    </div>
+</form>

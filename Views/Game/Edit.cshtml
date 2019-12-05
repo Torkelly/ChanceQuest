@@ -1,0 +1,28 @@
+﻿@model ChanceQuest.Models.Player.EditPlayer
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>EditPlayer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CharacterName" class="control-label"></label>
+                <input asp-for="CharacterName" class="form-control" />
+                <span asp-validation-for="CharacterName" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
