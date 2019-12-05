@@ -8,6 +8,7 @@ namespace ChanceQuest.Models
     public class GameViewModel
     {
         public int Id { get; set; }
+        public string CharacterName { get; set; }
         public int PeasantHappiness { get; set; }
         public int NobleHappiness { get; set; }
         public int RoyalHappiness { get; set; }

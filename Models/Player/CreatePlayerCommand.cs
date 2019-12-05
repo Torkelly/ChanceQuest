@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using ChanceQuest.Entities;
 using ChanceQuest.Models.Player;
 
-namespace ChanceQuest.Entities
+namespace ChanceQuest.Models
 {
     public class CreatePlayerCommand : EditPlayer
     {
-        public Player ToPlayer()
+        public ChanceQuest.Entities.Player ToPlayer()
         {
-            return new Player
+            return new ChanceQuest.Entities.Player
             {
                 CharacterName = CharacterName,
                 PeasantHappiness = PeasantHappiness,

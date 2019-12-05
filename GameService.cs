@@ -63,10 +63,7 @@ namespace ChanceQuest
                 .Select(q => new QuestViewModel
                 {
                     Id = q.Id,
-                    Description = q.Description,
-                    HappyPlus = q.HappyPlus,
-                    HappyMinus = q.HappyMinus,
-                    FactionId = q.FactionId
+                    Description = q.Description
                 })
                 .SingleOrDefault();
         }
@@ -92,6 +89,7 @@ namespace ChanceQuest
                 {
                     PeasantHappiness = (p.PeasantHappiness + val)
                 });
+            _context.SaveChanges();
         }
 
         public void NobleHappinessUpdate(int id, int val)
@@ -101,7 +99,8 @@ namespace ChanceQuest
                 .Select(n => new NobleHappinessUpdateCommand
                 {
                     NobleHappiness = (n.NobleHappiness + val)
-                });
+                }); 
+            _context.SaveChanges();
         }
 
         public void RoyalHappinessUpdate(int id, int val)
@@ -112,6 +111,7 @@ namespace ChanceQuest
               {
                   RoyalHappiness = (r.RoyalHappiness + val)
               });
+            _context.SaveChanges();
         }
 
         public int CreatePlayer(CreatePlayerCommand cmd)
