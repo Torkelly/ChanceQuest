@@ -7,6 +7,7 @@ namespace ChanceQuest.Models.Player
 {
     public class EditPlayer
     {
+        public int Id { get; set; }
         public string CharacterName { get; set; }
         public int PeasantHappiness { get; set; }
         public int NobleHappiness { get; set; }

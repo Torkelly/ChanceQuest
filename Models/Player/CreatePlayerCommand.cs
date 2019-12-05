@@ -14,9 +14,9 @@ namespace ChanceQuest.Entities
             return new Player
             {
                 CharacterName = CharacterName,
-                PeasantHappiness = 50,
-                NobleHappiness = 50,
-                RoyalHappiness = 50,
+                PeasantHappiness = PeasantHappiness,
+                NobleHappiness = NobleHappiness,
+                RoyalHappiness = RoyalHappiness,
                 FavorableStatId = FavorableStatId
             };
         }
