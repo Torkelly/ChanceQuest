@@ -64,9 +64,6 @@ namespace ChanceQuest
                 {
                     Id = q.Id,
                     Description = q.Description,
-                    HappyPlus = q.HappyPlus,
-                    HappyMinus = q.HappyMinus,
-                    FactionId = q.FactionId
                 })
                 .SingleOrDefault();
         }
@@ -92,6 +89,7 @@ namespace ChanceQuest
                 {
                     PeasantHappiness = (p.PeasantHappiness + val)
                 });
+            _context.SaveChanges();
         }
 
         public void NobleHappinessUpdate(int id, int val)
@@ -102,6 +100,8 @@ namespace ChanceQuest
                 {
                     NobleHappiness = (n.NobleHappiness + val)
                 });
+            _context.SaveChanges();
+
         }
 
         public void RoyalHappinessUpdate(int id, int val)
@@ -112,6 +112,8 @@ namespace ChanceQuest
               {
                   RoyalHappiness = (r.RoyalHappiness + val)
               });
+            _context.SaveChanges();
+
         }
 
         public int CreatePlayer(CreatePlayerCommand cmd)
@@ -132,15 +134,16 @@ namespace ChanceQuest
             _context.SaveChanges();
         }
 
-        public UpdatePlayerCommand GetPlayerForUpdate(int Id)
+        public UpdatePlayerCommand GetPlayerForUpdate(int id)
         {
             return _context.Player
-                .Where(x => x.Id == Id)
+                .Where(x => x.Id == id)
                 .Where(x => !x.IsDeleted)
                 .Select(x => new UpdatePlayerCommand
                 {
                     CharacterName = x.CharacterName,
                     PeasantHappiness = x.PeasantHappiness,
+                    NobleHappiness = x.NobleHappiness,
                     RoyalHappiness = x.RoyalHappiness,
                     FavorableStatId = x.FavorableStatId,
                 })
